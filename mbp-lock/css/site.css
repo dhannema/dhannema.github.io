@@ -4546,6 +4546,10 @@ a.ci-status {
   .mobile-only {
     display: block
   }
+  .left-pane {
+    width: 100%!important;
+    margin-left: 0!important
+  }
   .index-page--title {
     line-height: 32px
   }
