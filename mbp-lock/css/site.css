@@ -5920,7 +5920,7 @@ a.ci-status {
   text-align: center
 }
 .homepage-title--container {
-  margin-top: 66px
+  margin-top: 166px
 }
 .homepage-subtitle, .homepage-title {
   background: rgba(52, 48, 45, .8);
@@ -6085,7 +6085,7 @@ a.ci-status {
   background-position: 100px 50%
 }
 .homepage--body .offset-feature--container.feature-riser {
-  background-image: url(../images/mbp-lock-6_small.jpg);
+  background-image: url(../images/mbp-lock-8_small.jpg);
   background-repeat: no-repeat;
   background-position: 80% 50%
 }
