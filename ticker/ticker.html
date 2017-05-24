@@ -1,10 +1,51 @@
 <html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+    var totalVal=0;
+    var totalInvested=0;
+
+    var coins=[
+      { id: "btc", num: 6.12, invested: 5229 },
+      { id: "eth", num: 432.10, invested: 4445 },
+      { id: "ltc", num: 117.03, invested: 350 },
+      { id: "maid", num: 18966, invested: 5000 },
+      { id: "xrp", num: 34113.60, invested: 5000 },
+      { id: "fct", num: 646.68, invested: 5000 }
+    ];
+
+    for (i in coins) {
+        jQuery.ajax({
+            url: "https://api.cryptonator.com/api/ticker/"+coins[i].id+"-eur",
+            type: "GET",
+            indexValue: i,
+            success: function(resultData) {
+                $("#"+coins[this.indexValue].id+"Price").text((resultData.ticker.price*1.0).toFixed(2));
+                $("#"+coins[this.indexValue].id+"Val").text((resultData.ticker.price*coins[this.indexValue].num*1.0).toFixed(2));
+                $("#"+coins[this.indexValue].id+"Invested").text((coins[this.indexValue].invested*1.0).toFixed(2));
+                totalVal+=resultData.ticker.price*coins[this.indexValue].num;
+                totalInvested+=coins[this.indexValue].invested;
+                $("#totalVal").text((totalVal*1.0).toFixed(2));
+                $("#totalInvested").text((totalInvested*1.0).toFixed(2));
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+            timeout: 120000
+        });
+    }
+</script>
+</head>
+
 <body>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/bitcoin/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/ethereum/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/litecoin/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/maidsafecoin/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/ripple/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
-<iframe id="widget-ticker-preview" src="//www.coingecko.com/en/widget_component/ticker/factom/eur" style="border:none; height:125px; width: 275px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe><br/>
+<table>
+<tr><td>BTC</td><td>&euro; <span id="btcPrice"></span></td><td>&euro; <span id="btcVal"></span></td><td>&euro; <span id="btcInvested"></span></td></tr>
+<tr><td>ETH</td><td>&euro; <span id="ethPrice"></span></td><td>&euro; <span id="ethVal"></span></td><td>&euro; <span id="ethInvested"></span></td></tr>
+<tr><td>LTC</td><td>&euro; <span id="ltcPrice"></span></td><td>&euro; <span id="ltcVal"></span></td><td>&euro; <span id="ltcInvested"></span></td></tr>
+<tr><td>MAID</td><td>&euro; <span id="maidPrice"></span></td><td>&euro; <span id="maidVal"></span></td><td>&euro; <span id="maidInvested"></span></td></tr>
+<tr><td>XRP</td><td>&euro; <span id="xrpPrice"></span></td><td>&euro; <span id="xrpVal"></span></td><td>&euro; <span id="xrpInvested"></span></td></tr>
+<tr><td>FCT</td><td>&euro; <span id="fctPrice"></span></td><td>&euro; <span id="fctVal"></span></td><td>&euro; <span id="fctInvested"></span></td></tr>
+<tr><td>Total</td><td></td><td>&euro; <span id="totalVal"></span></td><td>&euro; <span id="totalInvested"></span></td></tr>
 </body>
+
 </html>
