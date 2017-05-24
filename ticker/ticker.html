@@ -16,7 +16,7 @@
     ];
 
     for (i in coins) {
-        jQuery.ajax({
+        $.ajax({
             url: "https://api.cryptonator.com/api/ticker/"+coins[i].id+"-eur",
             type: "GET",
             indexValue: i,
