@@ -32,10 +32,11 @@
         invested: 5000
     }];
 
-    for (i in coins) {
+    function loadTicker(i) {
         $.ajax({
             url: "https://api.cryptonator.com/api/ticker/" + coins[i].id + "-eur",
             type: "GET",
+            dataType: 'json',
             indexValue: i,
             success: function(resultData) {
                 $("#" + coins[this.indexValue].id + "Price").text((resultData.ticker.price * 1.0).toFixed(2));
@@ -60,6 +61,10 @@
             error: function(jqXHR, textStatus, errorThrown) {},
             timeout: 120000
         });
+    }
+
+    for (i in coins) {
+        setTimeout("loadTicker(" + i + ")", i * 500);
     }
     </script>
 </head>
