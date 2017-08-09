@@ -20,7 +20,7 @@
         invested: 0
     }, {
         id: "eth",
-        num: 432.10,
+        num: 444.60,
         invested: 4445
     }, {
         id: "ltc",
@@ -50,10 +50,12 @@
                 $("#" + coins[this.indexValue].id + "Price").text((resultData.ticker.price * 1.0).toFixed(2));
                 $("#" + coins[this.indexValue].id + "Val").text((resultData.ticker.price * coins[this.indexValue].num * 1.0).toFixed(2));
                 $("#" + coins[this.indexValue].id + "Invested").text((coins[this.indexValue].invested * 1.0).toFixed(2));
+                $("#" + coins[this.indexValue].id + "Num").text((coins[this.indexValue].num * 1.0).toFixed(2));
                 totalVal += resultData.ticker.price * coins[this.indexValue].num;
                 totalInvested += coins[this.indexValue].invested;
                 $("#totalVal").text((totalVal * 1.0).toFixed(2));
                 $("#totalInvested").text((totalInvested * 1.0).toFixed(2));
+                $("#totalProfit").text(((totalVal - totalInvested) * 1.0).toFixed(2));
             },
             error: function(jqXHR, textStatus, errorThrown) {},
             timeout: 120000
@@ -85,6 +87,7 @@
             <td>&euro; <span id="btcPrice"></span></td>
             <td>&euro; <span id="btcVal"></span></td>
             <td>&euro; <span id="btcInvested"></span></td>
+            <td>&euro; <span id="btcNum"></span></td>
         </tr>
         <tr>
             <td>BCC</td>
@@ -92,6 +95,7 @@
             <td>&euro; <span id="bccPrice"></span></td>
             <td>&euro; <span id="bccVal"></span></td>
             <td>&euro; <span id="bccInvested"></span></td>
+            <td>&euro; <span id="bccNum"></span></td>
         </tr>
         <tr>
             <td>ETH</td>
@@ -99,6 +103,7 @@
             <td>&euro; <span id="ethPrice"></span></td>
             <td>&euro; <span id="ethVal"></span></td>
             <td>&euro; <span id="ethInvested"></span></td>
+            <td>&euro; <span id="ethNum"></span></td>
         </tr>
         <tr>
             <td>ETC</td>
@@ -106,6 +111,7 @@
             <td>&euro; <span id="etcPrice"></span></td>
             <td>&euro; <span id="etcVal"></span></td>
             <td>&euro; <span id="etcInvested"></span></td>
+            <td>&euro; <span id="etcNum"></span></td>
         </tr>
         <tr>
             <td>LTC</td>
@@ -113,6 +119,7 @@
             <td>&euro; <span id="ltcPrice"></span></td>
             <td>&euro; <span id="ltcVal"></span></td>
             <td>&euro; <span id="ltcInvested"></span></td>
+            <td>&euro; <span id="ltcNum"></span></td>
         </tr>
         <tr>
             <td>MAID</td>
@@ -120,6 +127,7 @@
             <td>&euro; <span id="maidPrice"></span></td>
             <td>&euro; <span id="maidVal"></span></td>
             <td>&euro; <span id="maidInvested"></span></td>
+            <td>&euro; <span id="maidNum"></span></td>
         </tr>
         <tr>
             <td>XRP</td>
@@ -127,6 +135,7 @@
             <td>&euro; <span id="xrpPrice"></span></td>
             <td>&euro; <span id="xrpVal"></span></td>
             <td>&euro; <span id="xrpInvested"></span></td>
+            <td>&euro; <span id="xrpNum"></span></td>
         </tr>
         <tr>
             <td>FCT</td>
@@ -134,6 +143,7 @@
             <td>&euro; <span id="fctPrice"></span></td>
             <td>&euro; <span id="fctVal"></span></td>
             <td>&euro; <span id="fctInvested"></span></td>
+            <td>&euro; <span id="fctNum"></span></td>
         </tr>
         <tr>
             <td>Total</td>
@@ -141,6 +151,12 @@
             <td></td>
             <td>&euro; <span id="totalVal"></span></td>
             <td>&euro; <span id="totalInvested"></span></td>
+        </tr>
+        <tr>
+            <td>Profit</td>
+            <td></td>
+            <td></td>
+            <td>&euro; <span id="totalProfit"></span></td>
         </tr>
 </body>
 
