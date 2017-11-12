@@ -8,55 +8,64 @@
 
     var coins = [{
         id: "btc",
+        x: "BTC",
         num: 6.05,
         invested: 5229
     }, {
         id: "bch",
+        x: "BCH",
         num: 30.03,
         invested: 606
     }, {
         id: "btg",
+        x: "BTG",
         num: 6.05,
         invested: 0
     }, {
         id: "etc",
+        x: "ETC",
         num: 277.74,
         invested: 0
     }, {
         id: "eth",
+        x: "ETH",
         num: 400.98,
         invested: 3839
     }, {
         id: "ltc",
+        x: "LTC",
         num: 117.03,
         invested: 350
     }, {
         id: "maid",
+        x: "MAID",
         num: 18966,
         invested: 5000
     }, {
         id: "xrp",
+        x: "XRP",
         num: 34113.60,
         invested: 5000
     }, {
         id: "fct",
+        x: "FCT",
         num: 646.68,
         invested: 5000
     }];
 
     function loadTicker(i) {
         $.ajax({
-            url: "https://api.cryptonator.com/api/ticker/" + coins[i].id + "-eur",
+            url: "https://min-api.cryptocompare.com/data/histoday?aggregate=1&e=CCCAGG&fsym=" + coins[i].x + "&limit=1&tsym=EUR",
             type: "GET",
             dataType: 'json',
             indexValue: i,
             success: function(resultData) {
-                $("#" + coins[this.indexValue].id + "Price").text((resultData.ticker.price * 1.0).toFixed(2));
-                $("#" + coins[this.indexValue].id + "Val").text((resultData.ticker.price * coins[this.indexValue].num * 1.0).toFixed(0));
+                $("#" + coins[this.indexValue].id + "Price").text((resultData.Data[0].close * 1.0).toFixed(2));
+                $("#" + coins[this.indexValue].id + "Val").text((resultData.Data[0].close * coins[this.indexValue].num * 1.0).toFixed(0));
                 $("#" + coins[this.indexValue].id + "Invested").text((coins[this.indexValue].invested * 1.0).toFixed(0));
                 $("#" + coins[this.indexValue].id + "Num").text((coins[this.indexValue].num * 1.0).toFixed(1));
-                $("#" + coins[this.indexValue].id + "Multiplier").text((resultData.ticker.price / (coins[this.indexValue].invested / coins[this.indexValue].num) * 1.0).toFixed(1));
-                totalVal += resultData.ticker.price * coins[this.indexValue].num;
+                $("#" + coins[this.indexValue].id + "Multiplier").text((resultData.Data[0].close / (coins[this.indexValue].invested / coins[this.indexValue].num) * 1.0).toFixed(1));
+                totalVal += resultData.Data[0].close * coins[this.indexValue].num;
                 totalInvested += coins[this.indexValue].invested;
                 $("#totalVal").text((totalVal * 1.0).toFixed(0));
                 $("#totalInvested").text((totalInvested * 1.0).toFixed(0));
@@ -68,11 +77,11 @@
         });
 
         $.ajax({
-            url: "https://api.cryptonator.com/api/ticker/" + coins[i].id + "-usd",
+            url: "https://min-api.cryptocompare.com/data/histoday?aggregate=1&e=CCCAGG&fsym=" + coins[i].x + "&limit=1&tsym=USD",
             type: "GET",
             indexValue: i,
             success: function(resultData) {
-                $("#" + coins[this.indexValue].id + "PriceUSD").text((resultData.ticker.price * 1.0).toFixed(2));
+                $("#" + coins[this.indexValue].id + "PriceUSD").text((resultData.Data[0].close * 1.0).toFixed(2));
             },
             error: function(jqXHR, textStatus, errorThrown) {},
             timeout: 120000
